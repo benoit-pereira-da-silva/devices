@@ -2,13 +2,14 @@
 // Use of this source code is governed under the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
-package adxl345
+package adxl345_test
 
 import (
 	"fmt"
 	"log"
 	"periph.io/x/conn/v3/i2c/i2creg"
 	"periph.io/x/conn/v3/spi/spireg"
+	"periph.io/x/devices/v3/adxl345"
 	"periph.io/x/host/v3"
 	"time"
 )
@@ -35,7 +36,7 @@ func ExampleNewI2C() {
 
 	defer p.Close()
 
-	d, err := NewI2C(p, I2CAddr, &DefaultOpts)
+	d, err := adxl345.NewI2C(p, I2CAddr, &adxl345.DefaultOpts)
 	if err != nil {
 		panic(err)
 	}
@@ -56,7 +57,7 @@ func ExampleNewSpi() {
 
 	defer p.Close()
 
-	d, err := NewSpi(p, &DefaultOpts)
+	d, err := adxl345.NewSpi(p, &adxl345.DefaultOpts)
 	if err != nil {
 		panic(err)
 	}
@@ -73,7 +74,7 @@ func mustInitHost() {
 }
 
 // measure reads the acceleration values every 30ms for <duration> seconds
-func measure(d *Dev, duration time.Duration) {
+func measure(d *adxl345.Dev, duration time.Duration) {
 
 	fmt.Println(d.String())
 
